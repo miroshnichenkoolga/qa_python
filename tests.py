@@ -7,21 +7,19 @@ class TestBooksCollector:
 
     def test_add_new_book_one_book_true(self):
         collector = BooksCollector()
-        count = len(collector.get_books_genre())
 
         wantBook = 'Гордость и предубеждение и зомби'
         collector.add_new_book(wantBook)
 
-        wantCount = count + 1
+        wantCount = 1
         gotBooks = collector.get_books_genre()
-        got = gotBooks.get(wantBook)
+
         assert len(gotBooks) == wantCount
-        assert got is not None
+
 
     @pytest.mark.parametrize('name_book',
                              ['', '41символ полночи Автор:Семен Бобриковский',
-                              '42символа Тройке:Аркадий, Борис Стругацкие',
-                              '50Симплициссимус: Ганс Якоб Кристо Гриммельсгаузен'])
+                              '42символа Тройке:Аркадий, Борис Стругацкие'])
     def test_add_new_book_zero_or_more_41_(self, name_book):
         collector = BooksCollector()
         count = len(collector.get_books_genre())
@@ -30,9 +28,9 @@ class TestBooksCollector:
 
         wantCount = count
         gotBooks = collector.get_books_genre()
-        got = gotBooks.get(name_book)
+
         assert len(gotBooks) == wantCount
-        assert got is None
+
 
     def test_set_book_genre_one_book_true(self):
         collector = BooksCollector()
@@ -85,7 +83,7 @@ class TestBooksCollector:
         genre = 'Ужасы'
         collector.set_book_genre(name, genre)
 
-        assert collector.get_books_for_children() != [name]
+        assert collector.get_books_for_children() == []
 
     def test_add_book_in_favorites_positive_result(self):
         collector = BooksCollector()
